@@ -26,7 +26,7 @@ check the response in the shell first - This step is to check the response is hi
  
  To get xPath use chrome or Firefox - Enable developer tools 
 ctrl+shift+I in chrome and Right the element and click on copy -xPath 
-[alink]http://selectorgadget.com/
+http://selectorgadget.com/
 
 Or use the chrome extension  - SelectorGadget which can give the xPath automatically 
  
