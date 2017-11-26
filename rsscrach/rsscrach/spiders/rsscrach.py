@@ -1,48 +1,51 @@
 import scrapy
 import pyquery
 import re
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
+from pyquery import PyQuery
 
-class rsscarch(scrapy.Spider):
+
+class rsscarch(CrawlSpider):
 
     name = 'spiders'
 
     start_urls = ['http://www.rsscarch.com/project/peters-township-library/']
+    rules = [
+    Rule(LinkExtractor(allow=['/project/*']),callback='parse',follow=True)
+    ]
 
 
 
     def parse(self, response):
-        print('--- pyquery 1 ---')
-        p = pyquery.PyQuery(response.body)
-        for title in p('h2 '):
-            print('>>>', title, title.text, '<<<') # `title.text` gives "\n"
-
-        print('--- pyquery 2 ---')
+       
+        print('----------------pyquery ------------')
         p = pyquery.PyQuery(response.body)
         for title in p('h2'):
-            print('>>>',title, '<<<')
-        #print(p('h2').text())
-        #print(p('p').text())
-        txt =p('p').text()
-        print(txt.split(':'))
-        #print(txt.index("client:"))
-        #print(txt.split(' ', 5))
-        #d = dict(txt.split(':') for s in a)
-        #print(d)
+            #print('>>>',title, '<<<')
+            txt =p('p').text()
+        label = re.findall(r'[A-Za-z]*:',txt)
+        label = [x.replace(':','') for x in label ]
+        value = [val for val in re.split(r'[A-Za-z]*:',txt) if val is not '']
+        value[2] = value[2].split()[0]
+        #print(value)
+        scrapped_info={
+        'title':value[0],
+        'locaion':value[1],
+        'size':value[2],
+        'description': txt
+        }
+        print('>>>Title     :',value[0])
+        print('>>>Location  :',value[1])
+        print('>>>Size      :',value[2])
+        print('>>>Description:',txt)
+        
+        
+        yield scrapped_info
 
-        #print(txt.split())
+        
 
-       # print('--- pyquery 3 ---')
-        #p = pyquery.PyQuery(response.body).text
-        #for title in p('h2 a'):
-         #   print('>>>', title, title.text())
-
+       
 # ---------------------------------------------------------------------
 
-from scrapy.crawler import CrawlerProcess
 
-process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-})
-
-process.crawl(rsscarch)
-process.start(stop_after_crawl=False)
