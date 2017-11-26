@@ -17,14 +17,12 @@ First check the URL via scrappy shell
 
 check the response in the shell first - This step is to check the response is hitting our python env , some cases firewall or some Javascript sites might now work well with scrapy.
 
-```In [4]: response.url
-Out[4]: 'http://www.rsscarch.com/project/peters-township-library/'
-
-In [5]: response.xpath('//*[contains(concat( " ", @class, " " ), concat( " ", "post-title", " " ))] | //p').extract()
-Out[5]:
-['<h2 class="post-title">Peters Township Library</h2>',
- '<p><strong>Client: </strong>Peters Township<br>\n<strong>Location: </strong>McMurray Township, Pennsylvania<br>\n<strong>Size: </strong>23,000 SF</p>',
- '<p><span id="more-178"></span></p>',```
+```In [4]: response.url```
+```Out[4]: 'http://www.rsscarch.com/project/peters-township-library/'```
+```In [5]: response.xpath('//*[contains(concat( " ", @class, " " ), concat( " ", "post-title", " " ))] | //p').extract()```
+```Out[5]:['<h2 class="post-title">Peters Township Library</h2>'```
+```'<p><strong>Client: </strong>Peters Township<br>\n<strong>Location: </strong>McMurray Township,``` ```Pennsylvania<br>\n<strong>Size</strong>23,000 SF</p>',```
+ ```'<p><span id="more-178"></span></p>```
  
  
  Once the response is checked, Create a scrapy project. Unlike other libraries The scrapy provides the skeleton structure for easy spider development
