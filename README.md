@@ -24,6 +24,11 @@ check the response in the shell first - This step is to check the response is hi
 ```'<p><strong>Client: </strong>Peters Township<br>\n<strong>Location: </strong>McMurray Township,``` ```Pennsylvania<br>\n<strong>Size</strong>23,000 SF</p>',```
  ```'<p><span id="more-178"></span></p>```
  
+ To get xPath use chrome or Firefox - Enable developer tools 
+ctrl+shift+I in chrome and Right the element and click on copy -xPath 
+[alink]http://selectorgadget.com/
+
+Or use the chrome extension  - SelectorGadget which can give the xPath automatically 
  
  Once the response is checked, Create a scrapy project. Unlike other libraries The scrapy provides the skeleton structure for easy spider development
  ```scrapy startproject rsscrachcrawler```
