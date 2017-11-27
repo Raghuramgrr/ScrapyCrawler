@@ -8,8 +8,9 @@ from pyquery import PyQuery
 
 class rsscarch(CrawlSpider):
 
-    name = 'spiders'
 
+    name = 'spiders'
+    allowed_domains = ['http://www.rsscarch.com']
     start_urls = ['http://www.rsscarch.com/project/peters-township-library/']
     rules = [
     Rule(LinkExtractor(allow=['/project/*']),callback='parse',follow=True)
