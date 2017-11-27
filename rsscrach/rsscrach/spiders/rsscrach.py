@@ -15,7 +15,7 @@ class rsscarch(CrawlSpider):
     Rule(LinkExtractor(allow=['/project/*']),callback='parse',follow=True)
     ]
 
-
+#--------------------------------------------------------------------------------------------------------
 
     def parse(self, response):
        
@@ -27,18 +27,20 @@ class rsscarch(CrawlSpider):
         label = re.findall(r'[A-Za-z]*:',txt)
         label = [x.replace(':','') for x in label ]
         value = [val for val in re.split(r'[A-Za-z]*:',txt) if val is not '']
+        description=re.findall(r'\SF(.*)',txt)
+        #print(description)
         value[2] = value[2].split()[0]
         #print(value)
         scrapped_info={
         'title':value[0],
         'locaion':value[1],
         'size':value[2],
-        'description': txt
+        'description': description
         }
         print('>>>Title     :',value[0])
         print('>>>Location  :',value[1])
         print('>>>Size      :',value[2])
-        print('>>>Description:',txt)
+        print('>>>Description:',description)
         
         
         yield scrapped_info
