@@ -11,16 +11,19 @@ class rsscarch(CrawlSpider):
 
     name = 'spiders'
     allowed_domains = ['http://www.rsscarch.com']
-    start_urls = ['http://www.rsscarch.com/project/peters-township-library/']
+    start_urls = ['http://www.rsscarch.com/project/st-catherine-of-sweden/'
+    'http://www.rsscarch.com/project/golden-triangle-construction-corporate-office-building/',
+                 'http://www.rsscarch.com/project/holy-sepulcher-parish/'
+                 'http://www.rsscarch.com/project/peters-township-library/']
     rules = [
-    Rule(LinkExtractor(allow=['/project/*']),callback='parse',follow=True)
+    Rule(LinkExtractor(allow=['/project/.']),callback='parse',follow=True)
     ]
 
 #--------------------------------------------------------------------------------------------------------
 
     def parse(self, response):
        
-        print('----------------pyquery ------------')
+        print('-------------------------------------------------------------------pyquery ------------------------------------')
         p = pyquery.PyQuery(response.body)
         for title in p('h2'):
             #print('>>>',title, '<<<')
